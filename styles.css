@@ -3,7 +3,7 @@ body {
     padding: 0;
 }
 
-#link {
+#links {
     display: flex;
     justify-content: center;
     align-items: center;
