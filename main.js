@@ -24,7 +24,7 @@ input.addEventListener('keydown', async(e) => {
         }
         //url.searchParams.append('long', input.value);
         //url.searchParams.append('url', input.value);
-        api3(url);
+        api4(url);
     };
 });
 
@@ -67,3 +67,22 @@ async function api3(url) {
     })
     .catch(error => console.error('Error:', error));
 }
+
+async function api4(url) {
+    const link = new URL('https://spoo.me/');
+    link.searchParams.append('url', url);
+    console.log(link);
+    await fetch(link, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+        },
+    })
+    .then(res => res.json())
+    .then(data => {
+        links.textContent = data.short_url;
+        navigator.clipboard.writeText(links.textContent);
+    })
+    .catch(error => console.error('Error:', error));
+};
