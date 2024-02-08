@@ -9,7 +9,7 @@ input.addEventListener('input', (e) => {
     if (e.target.value.length > 0) {
         links.textContent = e.target.value;
     } else {
-        links.textContent = 'Paste your url here:';
+        links.textContent = 'Ctrl + V or type your URL here:';
     };
     input.focus();
 });
@@ -18,10 +18,12 @@ input.addEventListener('keydown', async(e) => {
     if (e.key.toLocaleLowerCase() === 'enter') {
         e.preventDefault();
         //const url = new URL('https://csclub.uwaterloo.ca/~phthakka/1pt-express/addURL');
-        const url = input.value;
+        let url = input.value;
+        if (!url.startsWith('https://')) {
+            url = 'https://' + url;
+        }
         //url.searchParams.append('long', input.value);
         //url.searchParams.append('url', input.value);
-
         api3(url);
     };
 });
@@ -42,8 +44,7 @@ async function api(url) {
 };
 
 async function api2(url) {
-    const link = `https://is.gd/create.php?format=json&url=${encodeURIComponent(url)}`
-    await fetch(link)
+    await fetch(`https://is.gd/create.php?format=json&url=${encodeURIComponent(url)}`)
     .then(res => res.json())
     .then(data => {
         links.textContent = data.shorturl;
@@ -53,19 +54,16 @@ async function api2(url) {
 };
 
 async function api3(url) {
-    const proxy = 'https://api.codetabs.com/v1/proxy?quest=';
-    const link = `https://ulvis.net/api/write/post?url=${encodeURIComponent(url)}`;
-
-    await fetch(proxy + link, {
-        method: 'POST',
-        mode: 'no-cors',    
+    await fetch('https://api.allorigins.win/raw?url=' + 'https://ulvis.net/API/write/get?url=' + encodeURIComponent(`${url}`), {
+        method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data);
+        links.textContent = data.data.url;
+        navigator.clipboard.writeText(data.data.url);
     })
     .catch(error => console.error('Error:', error));
 }
