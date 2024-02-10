@@ -1,8 +1,25 @@
 const input = document.getElementById('input');
 const links = document.getElementById('links');
+const providers = document.querySelectorAll('.provider');
+let index = 0;
 
 window.onload = () => {
     input.focus();
+};
+
+function text(index, direction) {
+    providers.forEach((provider, i) => {
+        provider.style.opacity = 0;
+        provider.classList.remove('up', 'down');
+    });
+
+    providers[index].style.opacity = 1;
+
+    if (direction === 'up' && index > 0) {
+        providers[index - 1].classList.add('up');
+    } else if (direction === 'down' && index < providers.length - 1) {
+        providers[index + 1].classList.add('down');
+    }
 };
 
 input.addEventListener('input', (e) => {
@@ -14,7 +31,7 @@ input.addEventListener('input', (e) => {
     input.focus();
 });
 
-input.addEventListener('keydown', async(e) => {
+input.addEventListener('keydown', (e) => {
     if (e.key.toLocaleLowerCase() === 'enter') {
         e.preventDefault();
         //const url = new URL('https://csclub.uwaterloo.ca/~phthakka/1pt-express/addURL');
@@ -24,7 +41,27 @@ input.addEventListener('keydown', async(e) => {
         }
         //url.searchParams.append('long', input.value);
         //url.searchParams.append('url', input.value);
+        
         api4(url);
+    };
+    switch (e.key.toLocaleLowerCase()) {
+        case 'enter':
+            //soon
+            break;
+        case 'arrowup':
+            if (index > 0) {
+                index--;
+            }
+            providers.textContent = providers[index];
+            text(index, 'up');
+            break;
+        case 'arrowdown':
+            if (index < providers.length - 1) {
+                index++;
+            }
+            providers.textContent = providers[index];
+            text(index, 'down');
+            break;
     };
 });
 
