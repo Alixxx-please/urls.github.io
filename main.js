@@ -33,10 +33,11 @@ input.addEventListener('keydown', (e) => {
     switch (e.key.toLocaleLowerCase()) {
         case 'enter':
             e.preventDefault();
+            let content = '';
             let urls = input.value;
             if (!urls.startsWith('https://')) {
                 urls = 'https://' + urls;
-            }
+            };
             providers[index].style.cursor = 'pointer';
             switch (true) {
                 case providers[index].textContent.includes('1pt.co'):
@@ -45,6 +46,13 @@ input.addEventListener('keydown', (e) => {
                     api(url1).then(() => {
                         providers[index].addEventListener('click', () => {
                             navigator.clipboard.writeText('1pt.co/' + links[0].textContent);
+                            content = '1pt.co/' + links[0].textContent;
+                            providers[index].textContent = 'Link copied to clipboard!';
+                            providers[index].classList.add('pulse');
+                            timeout = setTimeout(() => {
+                                providers[index].textContent = content
+                                providers[index].classList.remove('pulse');
+                            }, 1800);
                         });
                     });
                     break;
@@ -52,6 +60,13 @@ input.addEventListener('keydown', (e) => {
                     api2(urls).then(() => {
                         providers[index].addEventListener('click', () => {
                             navigator.clipboard.writeText('is.gd/' + links[1].textContent);
+                            content = 'is.gd/' + links[1].textContent;
+                            providers[index].textContent = 'Link copied to clipboard!';
+                            providers[index].classList.add('pulse');
+                            timeout = setTimeout(() => {
+                                providers[index].textContent = content
+                                providers[index].classList.remove('pulse');
+                            }, 1800);
                         });
                     });
                     break;
@@ -59,6 +74,13 @@ input.addEventListener('keydown', (e) => {
                     api3(urls).then(() => {
                         providers[index].addEventListener('click', () => {
                             navigator.clipboard.writeText('spoo.me/' + links[2].textContent);
+                            content = 'spoo.me' + links[2].textContent;
+                            providers[index].textContent = 'Link copied to clipboard!';
+                            providers[index].classList.add('pulse');
+                            timeout = setTimeout(() => {
+                                providers[index].textContent = content
+                                providers[index].classList.remove('pulse');
+                            }, 1800);
                         });
                     });;
                     break;
@@ -68,6 +90,13 @@ input.addEventListener('keydown', (e) => {
                     api4(url2).then(() => {
                         providers[index].addEventListener('click', () => {
                             navigator.clipboard.writeText('ulvis.net/' + links[3].textContent);
+                            content = 'ulvis.net' + links[3].textContent;
+                            providers[index].textContent = 'Link copied to clipboard!';
+                            providers[index].classList.add('pulse');
+                            timeout = setTimeout(() => {
+                                providers[index].textContent = content
+                                providers[index].classList.remove('pulse');
+                            }, 1800);
                         });
                     });;
                     break;
