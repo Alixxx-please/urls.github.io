@@ -21,7 +21,7 @@ body {
 
 .provider {
     color: #ffffff;
-    background-color: #242424;
+    background-color: transparent;
     text-align: center;
     position: relative;
     border: 1px solid #ffffff;
@@ -38,6 +38,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    scale: 1.5;
     box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.2);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
@@ -91,4 +92,17 @@ input {
     color: transparent;
     caret-color: transparent;
     pointer-events: none;
+}
+
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: 'Gotham';
+    font-size: 20px;
+    opacity: 0.6;
+    scale: 1.1;
 }

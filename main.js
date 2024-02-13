@@ -74,7 +74,7 @@ input.addEventListener('keydown', (e) => {
                     api3(urls).then(() => {
                         providers[index].addEventListener('click', () => {
                             navigator.clipboard.writeText('spoo.me/' + links[2].textContent);
-                            content = 'spoo.me' + links[2].textContent;
+                            content = 'spoo.me/' + links[2].textContent;
                             providers[index].textContent = 'Link copied to clipboard!';
                             providers[index].classList.add('pulse');
                             timeout = setTimeout(() => {
@@ -90,7 +90,7 @@ input.addEventListener('keydown', (e) => {
                     api4(url2).then(() => {
                         providers[index].addEventListener('click', () => {
                             navigator.clipboard.writeText('ulvis.net/' + links[3].textContent);
-                            content = 'ulvis.net' + links[3].textContent;
+                            content = 'ulvis.net/' + links[3].textContent;
                             providers[index].textContent = 'Link copied to clipboard!';
                             providers[index].classList.add('pulse');
                             timeout = setTimeout(() => {
